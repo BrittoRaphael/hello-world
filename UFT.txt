@@ -1,0 +1,197 @@
+Set oIE = CreateObject("InternetExplorer.Application")
+oIE.Navigate "https://www-et2.abnamro.nl/portalserver/nl/prive/index.html"
+'InvokeApplication "C://Program Files/Google/Chrome/Application/chrome.EXE https://www-et2.abnamro.nl/portalserver/nl/prive/index.html"
+dim objAcptCks
+dim objWinSecty
+dim objLogin
+dim objPin5Login
+dim objAccountNumber
+dim objPassNumber
+dim objPin0
+dim objPin1
+dim objPin2
+dim objPin3
+dim objPin4
+dim objFinalLogin
+dim objNewTab
+dim objSendKey
+
+Set objWinSecty = Browser("Browser").Dialog("Windows Security")
+For i = 0 To 3 Step 1
+
+If Browser("Browser").Dialog("Windows Security").Exist(5) Then
+objWinSecty.WinEdit("WinEdit").Set"EnjoyA"
+objWinSecty.WinEdit("WinEditPwd").Set"Happy17"
+objWinSecty.WinButton("OK").Click
+End If
+Next
+
+set objAcptCks = Browser("Browser").Page("Particuliere klanten -").Link("xpath:=//a[@class='mlf-js-cookie-accept mlf-button mlf-button-action']")
+
+If objAcptCks.exist(3) Then
+objAcptCks.Click
+
+End If
+
+'Set objNewTab = Browser("Browser").WinObject("WinObject").WinButton("New tab (Ctrl+T)")
+'objNewTab.Click
+'Browser("Browser").WinEdit("Edit").Set "https://www-et2.abnamro.nl/portalserver/nl/bankieren/fiscaal-sparen/pensioenaanvulling-met-variabele-rente?mbpid="
+'Browser("Browser").WinEdit("Edit").exist(6)
+'Browser("Browser").WinToolbar("Page Control").Click
+
+
+'Browser("Browser").Object.Navigate "https://www-et2.abnamro.nl/portalserver/nl/bankieren/fiscaal-sparen/pensioenaanvulling-met-variabele-rente?mbpid=",Clng(&H800)
+
+'oIE.Navigate "https://www-et2.abnamro.nl/portalserver/nl/bankieren/fiscaal-sparen/pensioenaanvulling-met-variabele-rente?mbpid="
+
+'set objLogin = Browser("Browser").Page("Particuliere klanten -").WebElement("xpath:=//a[@title='Log in in Internet Bankieren']/span]")
+'set objLogin = Browser("Browser").Page("Particuliere klanten -").WebElement("log in")
+
+'If objLogin.exist(3) Then
+'objLogin.Click
+
+'Else msgbox"Not Visible"
+
+'End If
+
+set objLogin = Browser("Browser").Page("Particuliere klanten -").WebElement("xpath:=//a[@class='mcf-tl mcf-button mcf-button-action mcf-button-login mcf-send']")
+
+If objLogin.exist(3) Then
+objLogin.Click
+
+Else msgbox"Not Visible"
+
+End If
+
+set objPin5Login = Browser("Browser").Page("Particuliere klanten -").WebElement("xpath:=//a[@class='mcf-tl mcf-button mcf-button-action mcf-login mcf-loginSofttoken']")
+
+If objPin5Login.exist(3) Then
+objPin5Login.Click
+
+Else msgbox"Not Visible"
+
+End If
+
+set objAccountNumber = Browser("Browser").Page("Particuliere klanten -").WebEdit("accountnumberInput")
+'set objPassNumber = Browser("Browser").Page("Particuliere klanten -").WebEdit("cardnumberInput")
+
+If objAccountNumber.exist(3) Then
+objAccountNumber.Set"506162001"
+Else msgbox"Not Visible"
+End If
+
+set objPassNumber = Browser("Browser").Page("Particuliere klanten -").WebEdit("cardnumberInput")
+'set objPassNumber = Browser("Browser").Page("Particuliere klanten -").WebEdit("xpath:=//input[@class='mcf-cardnumber mcf-get-message mcf-message-target']")
+
+if objPassNumber.exist(3) Then
+objPassNumber.Set"463"
+Else msgbox"Not Visible"
+End If
+
+Set oShell = CreateObject("WScript.Shell")
+
+Setting.WebPackage("ReplayType")=2
+'oShell.SendKeys("{5 2}")
+
+Set objPin0 = Browser("Browser").Page("Particuliere klanten -").WebEdit("login-pincode-0")
+if objPin0.exist(1) Then
+objPin0.Click
+objPin0.Set"1"
+Else msgbox"Not Visible"
+End If
+
+Set objPin1 = Browser("Browser").Page("Particuliere klanten -").WebEdit("login-pincode-1")
+if objPin1.exist(1) Then
+objPin1.Set "2"
+Else msgbox"Not Visible"
+End If
+
+Set objPin2 = Browser("Browser").Page("Particuliere klanten -").WebEdit("login-pincode-2")
+if objPin2.exist(1) Then
+objPin2.Set"1"
+Else msgbox"Not Visible"
+End If
+
+'oShell.SendKeys("{2 2}")
+'Set oShell = CreateObject("WScript.Shell")
+'oShell.SendKeys "2"
+'wait(1)
+'Set oShell = CreateObject("WScript.Shell")
+'oShell.SendKeys "1"
+Set objPin3 = Browser("Browser").Page("Particuliere klanten -").WebEdit("login-pincode-3")
+if objPin3.exist(1) Then
+objPin3.Set"2"
+Else msgbox"Not Visible"
+End If
+
+'Set objSendKey = CreateObject("WScript.Shell")
+'objSendKey.SendKeys“{TAB}”
+
+'oShell.SendKeys "{TAB}"
+
+Set objPin4 = Browser("Browser").Page("Particuliere klanten -").WebEdit("login-pincode-4")
+'objPin4.Click
+if objPin4.exist(1) Then
+objPin4.Set"1"
+Else msgbox"Not Visible"
+End If
+
+
+'set objFinalLogin = Browser("Browser").Page("Particuliere klanten -").WebEdit("xpath:=//input[@class='mcf-button mcf-button-action mcf-button-submit mcf-tl mcf-button-next-alt']")
+Set objFinalLogin = Browser("Browser").Page("Particuliere klanten -").WebButton("log in")
+If objFinalLogin.exist(2) Then
+objFinalLogin.Click
+Else msgbox"Not Visible"
+End If
+
+set objNewTab = Browser("Browser").WinObject("WinObject").WinButton("New tab (Ctrl+T)")
+objNewTab.Click
+
+Browser("Browser_2").WinEdit("Edit").Set"https://www-et2.abnamro.nl/portalserver/nl/prive/bankieren/pinsparen.html"
+if Browser("Browser_2").WinToolbar("Page Control").Exist(3) Then
+Browser("Browser_2").WinToolbar("Page Control").Click
+Else msgbox"Not Visible"
+End If
+
+Browser("Pinsparen - ABN AMRO").Page("Pinsparen - ABN AMRO").WebElement("1%").Click
+
+Browser("Pinsparen - ABN AMRO").Page("Pinsparen - ABN AMRO").WebEdit("P391-C2-C0-C0-F2").Set"1"
+wait(3)
+Browser("Pinsparen - ABN AMRO").Page("Pinsparen - ABN AMRO").WebEdit("P391-C2-C0-C0-F3").Set"5"
+wait(3)
+Browser("Pinsparen - ABN AMRO").Page("Pinsparen - ABN AMRO").WebList("P391-C2-C0-C0-C5-C0-C0-F0").Select 1
+wait(1)
+'Browser("Pinsparen - ABN AMRO").Page("Pinsparen - ABN AMRO").WebEdit("xpath:=//option[@class='ng-binding']").
+Browser("Pinsparen - ABN AMRO").Page("Pinsparen - ABN AMRO").WebList("P391-C2-C0-C0-C5-C0-C1-F0").Select 1
+Browser("Pinsparen - ABN AMRO").Page("Pinsparen - ABN AMRO").WebButton("Volgende").Click
+If Browser("Pinsparen - ABN AMRO").Page("Pinsparen - ABN AMRO").WebButton("Verzenden").exist(5) Then
+Browser("Pinsparen - ABN AMRO").Page("Pinsparen - ABN AMRO").WebButton("Verzenden").Click
+Else msgbox"Not Visible"
+End If
+
+If Browser("Pinsparen - ABN AMRO").Page("Pinsparen - ABN AMRO").Image("Bedankt voor uw aanvraag").exist(5) Then
+msgbox"Successfull Test"
+Else msgbox"Test failed"
+End If
+
+While Browser("CreationTime:=0").Exist(2)
+Browser("CreationTime:=0").Close
+WEND
+
+'dim URL,CreationTime,Mask
+
+'Mask = "abnamro.nl"
+
+'While Browser("CreationTime:=" & CreationTime).Exist
+'URL = Browser("CreationTime:=" & CreationTime).GetROProperty("URL")
+
+'If InStr (URL,Mask) > 0 then
+'Browser("CreationTime:=" & CreationTime).Close
+'Else
+'CreationTime = CreationTime + 1
+'End If
+'Wend
+
+
+
+
